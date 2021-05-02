@@ -39,7 +39,7 @@ const showLevelDialog = () => {
   
   
   return new Dialog({
-    title: "Blood magic cost",
+    title: "Blood Magic Cost",
     content: `
 <h1>Select spell level</h1>
 
