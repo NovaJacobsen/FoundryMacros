@@ -8,6 +8,10 @@ export class NovaDialog {
       default: '',
     });
   }
+
+  public render(): void {
+    this.dialog.render(true);
+  }
 }
 
 export namespace NovaDialog {

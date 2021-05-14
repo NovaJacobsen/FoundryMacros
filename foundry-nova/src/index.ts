@@ -1,14 +1,11 @@
 import html from "./a.html"
-console.log(html)
+import * as NovaDialog from "./NovaDialog/index"
 
-export class Nova {
-    constructor() {
-
+Hooks.on('ready', () => {
+    if (game.userId === "owhdFVBsbqlC79SE") {
+        NovaDialog.test.render()
+        console.log("Hi Nova!")
+    } else {
+        console.log("You're not nova!")
     }
-    smart() {
-        return true
-    }
-    awesome() {
-        return true
-    }
-}
+});
