@@ -1,0 +1,12 @@
+{
+  "name": "foundry-nova",
+  "title": "Nova's Foundry module",
+  "description": "an assorted collection of scripts and API improvements",
+  "author": "Nova",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.5.0",
+  "dependencies": [{
+    "name": "dnd5e",
+    "type": "system"
+  }]
+}
