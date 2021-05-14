@@ -1,19 +1,37 @@
-import "@league-of-foundry-developers/foundry-vtt-types"
+import "@league-of-foundry-developers/foundry-vtt-types";
 
 export class NovaDialog {
-    constructor(html: String, data: NovaDialog.Element[], buttons: DialogButton[]) {
-        let p : Dialog.Data = {
-
-        }
-        let dialog = new Dialog(p);
-    }    
+  dialog: Dialog
+  constructor(content: NovaDialog.Content) {
+    this.dialog = new Dialog({
+      title: content.title,
+      content: content.toHtml(),
+      buttons: {},
+      default: '',
+    });
+  }
 }
 
-declare namespace NovaDialog {
-    interface Element {
-        public key: String;
-        public type: ElementType;
+export namespace NovaDialog {
+  export class Content {
+    title;
+    elements;
+    template;
 
-        public extract();
+    constructor(title: string, elements: Element[], template: string) {
+      this.title = title
+      this.elements = elements
+      this.template = template
     }
+
+    public toHtml(): string {
+      return this.elements.reduce((t, e) => e.apply(t), this.template)
+    }
+  }
+
+  interface Element {
+    key: string
+
+    apply(template: string): string
+  }
 }
