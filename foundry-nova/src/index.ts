@@ -1,4 +1,3 @@
-import "@league-of-foundry-developers/foundry-vtt-types"
 export class Nova {
     constructor() {
 
