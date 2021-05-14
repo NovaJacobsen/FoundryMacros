@@ -52,6 +52,12 @@ module.exports = {
                 exclude: /node_modules/,
             },
         ],
+        rules: [
+            {
+                test: /\.(txt|html)$/,
+                use: 'raw-loader',
+            },
+        ]
     },
 
     resolve: {

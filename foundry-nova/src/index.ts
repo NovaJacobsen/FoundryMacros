@@ -1,3 +1,6 @@
+import html from "./a.html"
+console.log(html)
+
 export class Nova {
     constructor() {
 
