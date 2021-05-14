@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { Nova } from "../src/main"
+import { Nova } from "../src/index"
 
 describe('Nova', () => {
     it('she is awesome', () => {

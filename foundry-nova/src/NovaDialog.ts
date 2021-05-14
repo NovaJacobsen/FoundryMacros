@@ -1,5 +1,3 @@
-import "@league-of-foundry-developers/foundry-vtt-types";
-
 export class NovaDialog {
   dialog: Dialog
   constructor(content: NovaDialog.Content) {

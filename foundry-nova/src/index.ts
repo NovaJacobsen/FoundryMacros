@@ -1,4 +1,6 @@
-import "@league-of-foundry-developers/foundry-vtt-types"
+import html from "./a.html"
+console.log(html)
+
 export class Nova {
     constructor() {
 
