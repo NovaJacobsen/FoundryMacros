@@ -9,6 +9,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "moduleResolution": "node",
+    "lib": [ "dom", "es5", "scripthost", "es2015.collection" ],
     "types": ["@league-of-foundry-developers/foundry-vtt-types"],
   },
   "exclude": [
