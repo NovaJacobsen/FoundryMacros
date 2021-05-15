@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "build",
     "moduleResolution": "node",
     "lib": [ "dom", "es5", "scripthost", "es2015.collection" ],
     "types": ["@league-of-foundry-developers/foundry-vtt-types"],

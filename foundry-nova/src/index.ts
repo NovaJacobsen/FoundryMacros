@@ -2,7 +2,7 @@ import html from "./a.html"
 import * as NovaDialog from "./NovaDialog/index"
 
 Hooks.on('ready', () => {
-    if (game.userId === "owhdFVBsbqlC79SE") {
+    if (game.userId === "W6ZmuiuY59tnrNxv") {
         NovaDialog.test.render()
         console.log("Hi Nova!")
     } else {

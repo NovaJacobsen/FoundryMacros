@@ -27,7 +27,7 @@ const manifest = {
         }
     ],
     languages,
-    esmodules: "main.js"
+    esmodules: ["main.js"]
 }
 
 const addToManifest = (() => {
@@ -51,13 +51,11 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
-        ],
-        rules: [
             {
                 test: /\.(txt|html)$/,
                 use: 'raw-loader',
             },
-        ]
+        ],
     },
 
     resolve: {
