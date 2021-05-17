@@ -1,4 +1,3 @@
-import html from "./a.html"
 import * as NovaDialog from "./NovaDialog/index"
 
 Hooks.on('ready', () => {

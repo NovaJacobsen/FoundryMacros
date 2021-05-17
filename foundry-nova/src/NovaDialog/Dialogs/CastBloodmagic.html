@@ -4,10 +4,7 @@
     <select id="level" name="level" required>${options}</select>
 </div>
 
-<div>
-    <label for="bloodPoint">Spend blood point to reduce cost?</label>
-    <input type="checkbox" id="bloodPoint" name="bloodPoint">
-</div>
+#{BloodPoints}
 
 <h2>costs:</h2>
 <div>
@@ -24,11 +21,5 @@
 </div>
 
 <h2>options:</h2>
-<div>
-    <label for="toChat">Send message to chat?</label>
-    <input type="checkbox" id="toChat" name="toChat" checked>
-</div>
-<div>
-    <label for="update">Update character sheet?</label>
-    <input type="checkbox" id="update" name="update" checked>
-</div>
+#{SendToChat}
+#{Update}
