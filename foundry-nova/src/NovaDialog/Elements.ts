@@ -1,13 +1,12 @@
 import { NovaDialog } from ".";
-import * as Extractions from "./Extractions"
 
-export class Checkbox extends NovaDialog.Element<Extractions.Boolean> {
+export class Checkbox extends NovaDialog.Element<boolean> {
   label;
   checked
-  constructor(key: string, label?: string, checked?: boolean) {
+  constructor(key: string, parms: { label?: string, default?: boolean}) {
     super(key)
-    this.label = label
-    this.checked = checked
+    this.label = parms.label
+    this.checked = parms.default
   }
 
   injectHtml(): string {
@@ -18,6 +17,6 @@ export class Checkbox extends NovaDialog.Element<Extractions.Boolean> {
   }
 
   extract(html: JQuery<HTMLElement>) {
-    return new Extractions.Boolean(this.getElement<HTMLInputElement>(html).checked)
+    return this.getElement<HTMLInputElement>(html).checked
   }
 }

@@ -1,4 +1,4 @@
-export class NovaDialog {
+export class NovaDialog<T> {
   dialog: Dialog;
   title;
   elements;
@@ -6,27 +6,30 @@ export class NovaDialog {
   buttons: Record<string, Dialog.Button> = {};
   d: string = "";
 
-  constructor(parms: {
+  constructor({ title, elements, buttons, template}:{
     title: string,
-    elements: NovaDialog.Element<any>[],
-    buttons: Map<string, NovaDialog.Button>,
+    elements: NovaDialog.ElementCollection<T>,
+    buttons: { [K: string]: NovaDialog.Button<T> },
     template: string,
   }) {
-    this.title = parms.title
-    this.elements = parms.elements
-    this.html = this.elements.reduce((t, e) => e.apply(t), parms.template)
-    parms.buttons.forEach((button, name) => {
-      if (button.default) { this.d = name }
-      let callback = (button.callback) ? (html: HTMLElement | JQuery<HTMLElement>) => button.callback!(this.extract(html as JQuery)) : undefined
-      this.buttons[name] = {
-        icon: `<i class="fas fa-${button.icon}"></i>`,
-        label: button.label,
-        callback,
-      }
-    })
+    this.title = title
+    this.elements = elements
+    this.html = this.parseElements(elements).reduce((t, e) => e.apply(t), template)
+
+    Object.entries(buttons)
+      .forEach(([name, button]) => {
+        if (button.default) { this.d = name }
+        let callback = (button.callback) ? (html: HTMLElement | JQuery<HTMLElement>) => button.callback!(this.extract(html as JQuery)) : undefined
+        this.buttons[name] = {
+          icon: `<i class="fas fa-${button.icon}"></i>`,
+          label: button.label,
+          callback,
+        }
+      })
+
     this.dialog = new Dialog({
       title: this.title,
-      content: this.title,
+      content: this.html,
       buttons: this.buttons,
       default: this.d,
     });
@@ -36,21 +39,30 @@ export class NovaDialog {
     this.dialog.render(true);
   }
 
-  public extract(html: JQuery<HTMLElement>): NovaDialog.Params {
-    let out = new Map()
-    this.elements.forEach(e => out.set(e.key, e.extract(html)));
-    return out;
+  public extract(html: JQuery<HTMLElement>): T {
+    let out = {} as any
+    Object.entries(this.elements)
+      .map(([key,val]) => ({
+        key,
+        val: val as NovaDialog.Element
+      }))
+      .forEach(({key, val}) => out[key] = val.extract(html))
+    return out as T
+  }
+
+  private parseElements(e: NovaDialog.ElementCollection<T>): NovaDialog.Element[] {
+    return Object.values(e)
   }
 }
 
 export namespace NovaDialog {
   export type Params = Map<string, ExtractionResult>
+  export type ElementCollection<T> = { [P in keyof T]: Element<T[P]> }
 
-
-  export interface Button {
+  export interface Button<T> {
     icon?: string,
     label?: string,
-    callback?: (context: Params) => any,
+    callback?: (context: T) => any,
     default?: boolean
   }
 
@@ -60,7 +72,10 @@ export namespace NovaDialog {
     string(): string
   }
 
-  export abstract class Element<T extends ExtractionResult> {
+  export class ElementContext {
+  }
+
+  export abstract class Element<T = any> {
     key: string
 
     constructor(key: string) {
@@ -77,6 +92,5 @@ export namespace NovaDialog {
     protected getElement<K extends HTMLElement>(html: JQuery): K {
       return ((html as JQuery<HTMLElement>).find(`#${this.key}`)[0] as K)
     }
-
   }
 }

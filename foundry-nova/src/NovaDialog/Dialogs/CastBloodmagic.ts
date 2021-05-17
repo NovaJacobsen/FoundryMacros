@@ -2,40 +2,49 @@ import { NovaDialog } from "..";
 import { Checkbox } from "../Elements";
 import template from "./CastBloodmagic.html"
 
-const keys = {
-  bp: 'BloodPoints',
-  chat: 'SendToChat',
-  level: 'Level',
-  update: 'Update'
+type Model = {
+  bp: boolean,
+  chat: boolean,
+  //   level: number,
+  update: boolean,
 }
 
+const create = () => {
+  const buttons = {
+    confirm: {
+      icon: 'skull',
+      label: "Cast!",
+      callback: castBloodmagic
+    }
+  }
 
-const create= () =>{
-  const buttons = new Map<string, NovaDialog.Button>()
-  buttons.set('confirm', {
-    icon: 'skull',
-    label: "Cast!",
-    callback: castBloodmagic
-  })
-
-  const elements: NovaDialog.Element<any>[] = [
-    new Checkbox(keys.bp, 'Spend blood point to reduce cost?'),
-    new Checkbox(keys.chat, 'Send to chat?', true),
-    new Checkbox(keys.update, 'Send updates to character sheet?', true),
-  ]
+  const context = {
+    bp: new Checkbox('BloodPoints', {
+      label: 'Spend blood point to reduce cost?',
+    }),
+    chat: new Checkbox('SendToChat', {
+      label: 'Send to chat?',
+      default: true,
+    }),
+    update: new Checkbox('Update', {
+      label: 'Send updates to character sheet?',
+      default: true,
+    }),
+  }
 
   return new NovaDialog({
     title: "Blood Magic Cost",
-    elements,
+    elements: context,
     buttons,
-    template
+    template,
   });
 }
 
-const cost = (params: NovaDialog.Params) => {
+
+const cost = (params: Model) => {
   const costs = [4, 8, 12, 16, 20, 25, 30, 35, 40]
-  const bpCost = (params.get(keys.bp)!.bool() ? 1 : 0)
-  const hpCost = costs[params.get(keys.level)!.number()-1] - bpCost
+  const bpCost = (params.bp ? 1 : 0)
+  const hpCost = 0 //costs[params.get(keys.level)!.number()-1] - bpCost*3
   const cCost = Math.floor(hpCost / 2)
 
   return {
@@ -45,14 +54,14 @@ const cost = (params: NovaDialog.Params) => {
   }
 }
 
-const castBloodmagic = (params: NovaDialog.Params) => {
+const castBloodmagic = (params: Model) => {
   const me = game.user!.character
   const costs = cost(params)
 
-  if (params.get(keys.chat)?.bool()) {
+  if (params.chat) {
     ChatMessage.create({
       user: game.user!._id,
-      content: `${me.name} cast a blood magic spell at level ${params.get(keys.level)?.number()} by spending ${costs.hpCost} health and ${costs.bpCost} blood points`,
+      content: `${me.name} cast a blood magic spell at level ${0} by spending ${costs.hpCost} health and ${costs.bpCost} blood points`,
       type: CONST.CHAT_MESSAGE_TYPES.EMOTE
     })
   }
