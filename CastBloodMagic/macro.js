@@ -1,7 +1,6 @@
 const costs = [4,8,12,16,20,25,30,35,40];
 
 const cost = (data) => {
-  console.log(data)
   let bpCost = data.bloodPoints || 0
   let hpCost = costs[data.level - 1] - (3*bpCost)
   let cCost = Math.floor(hpCost/2)

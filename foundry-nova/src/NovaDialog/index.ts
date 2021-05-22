@@ -1,2 +1,2 @@
-export * from "./NovaDialog"
-export * from "./TestDialog"
+export {NovaDialog} from "./NovaDialog"
+export * from "./Dialogs/index"
