@@ -2,7 +2,7 @@ name: Deploy to Build Branch
 on:
   push:	
     branches:	
-      - master
+      - main
 
 jobs:
   deploy:
@@ -16,6 +16,7 @@ jobs:
         node-version: 14.x
     - name: npm install and build
       run: |
+        cd foundry-nova
         npm install
         npm run build
 
@@ -24,5 +25,5 @@ jobs:
       env:
         REPO: self
         BRANCH: build
-        FOLDER: dist
+        FOLDER: foundry-nova/dist
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
