@@ -3,7 +3,6 @@ const ISO6391 = require('iso-639-1');
 const fs = require("fs")
 const CreateFileWebpack = require('create-file-webpack')
 const CopyPlugin = require("copy-webpack-plugin");
-const ZipPlugin = require('zip-webpack-plugin');
 
 const languages = fs.readdirSync(path.resolve(__dirname, "lang")).map(x => {
     let lang = x.split(".")[0];
@@ -78,9 +77,6 @@ module.exports = {
                 }
             ]
         }),
-        new ZipPlugin({
-            filename: "dist.zip"
-        })
     ],
 
     output: {
