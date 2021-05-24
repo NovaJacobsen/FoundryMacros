@@ -26,7 +26,10 @@ const manifest = {
         }
     ],
     languages,
-    esmodules: ["main.js"]
+    esmodules: ["main.js"],
+    url: "https://github.com/NovaJacobsen/FoundryMacros",
+    manifest: "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/build/module.json",
+    download: "https://codeload.github.com/NovaJacobsen/FoundryMacros/zip/refs/heads/build",
 }
 
 const addToManifest = (() => {
