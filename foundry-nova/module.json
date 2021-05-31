@@ -5,6 +5,6 @@
   "dependencies": [],
   "esmodules": ["index.js"],
   "url": "https://github.com/NovaJacobsen/FoundryMacros",
-  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/build/module.json",
+  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/main/foundry-nova/module.json",
   "download": "https://codeload.github.com/NovaJacobsen/FoundryMacros/zip/refs/heads/build"
 }

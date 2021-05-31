@@ -1,4 +1,4 @@
-import {Nova} from '..'
+import { Nova } from "../..";
 
 export class NovaDialog<T> {
   dialog: Dialog;

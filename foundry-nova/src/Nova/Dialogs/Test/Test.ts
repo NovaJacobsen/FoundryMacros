@@ -27,11 +27,11 @@ const elements = {
   })
 }
 
-const test = new Nova.Dialog({
+const Test = new Nova.Dialog({
   title: "A test",
   elements,
   buttons,
   template
 })
 
-export { test };
+export { Test };

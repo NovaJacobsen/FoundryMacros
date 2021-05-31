@@ -9,19 +9,15 @@
     "rootDir": "src",
     "outDir": "build",
     "moduleResolution": "node",
-    "lib": [ 
+    "lib": [
       "ESNext.String",
-      "dom", 
-      "es2015.collection" , 
-      "es2017" , 
-      "es5", 
-      "scripthost", 
+      "dom",
+      "es2015.collection",
+      "es2017",
+      "es5",
+      "scripthost"
     ],
-    "types": ["@league-of-foundry-developers/foundry-vtt-types"],
+    "types": ["@league-of-foundry-developers/foundry-vtt-types"]
   },
-  "exclude": [
-    "./tests/",
-    "./node_modules/",
-    "./dist/"
-  ],
+  "exclude": ["./tests/", "./node_modules/", "./dist/"]
 }
