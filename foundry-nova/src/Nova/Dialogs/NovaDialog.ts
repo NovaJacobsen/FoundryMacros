@@ -16,7 +16,7 @@ export class NovaDialog<T> {
   }: {
     title: string;
     elements: Nova.Elements.ElementCollection<T>;
-    buttons: { [K: string]: Button<T> };
+    buttons: { [_: string]: Button<T> };
     template: string;
   }) {
     this.title = title;

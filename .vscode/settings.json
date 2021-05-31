@@ -7,6 +7,5 @@
         "**/node_modules": true,
         "**/dist": true,
         "**/.DS_Store": true,
-
     }
 }
