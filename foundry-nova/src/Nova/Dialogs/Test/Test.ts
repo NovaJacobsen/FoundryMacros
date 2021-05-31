@@ -1,11 +1,9 @@
-import { Checkbox } from "../Elements";
-import { NovaDialog } from "../NovaDialog";
+import { Nova } from "../../.."
 import template from "./Test.html"
 
 type Model = {
   theBox: boolean,
 }
-
 
 const buttons = {
   yay: {
@@ -24,12 +22,12 @@ const buttons = {
 
 
 const elements = {
-  theBox: new Checkbox('theBox', {
+  theBox: new Nova.Elements.Checkbox('theBox', {
     label: 'This is a test checkbox',
   })
 }
 
-const test = new NovaDialog({
+const test = new Nova.Dialog({
   title: "A test",
   elements,
   buttons,

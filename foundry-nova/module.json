@@ -1,0 +1,10 @@
+{
+  "title": "Nova's Foundry module",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.5.0",
+  "dependencies": [],
+  "esmodules": ["index.js"],
+  "url": "https://github.com/NovaJacobsen/FoundryMacros",
+  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/build/module.json",
+  "download": "https://codeload.github.com/NovaJacobsen/FoundryMacros/zip/refs/heads/build"
+}
