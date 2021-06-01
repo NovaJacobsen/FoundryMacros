@@ -1,16 +1,13 @@
-import { Element } from "./Element";
-
+import { Base } from "./Base";
 interface Parms<T> {
   label?: string;
   required?: boolean;
   options: { value: T; label: string }[];
 }
-
-export class Dropdown<T> extends Element<T> {
+export class Dropdown<T> extends Base<T> {
   private parms;
 
   constructor(key: string, parms: Parms<T>) {
-
     super(key);
     this.parms = parms;
   }

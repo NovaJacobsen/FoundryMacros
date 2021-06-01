@@ -1,37 +1,35 @@
-import { Nova } from "../../.."
-import template from "./Test.html"
+import { Elements } from "../../Elements";
+import { NovaDialog } from "..";
+import template from "./Test.html";
 
 type Model = {
-  theBox: boolean,
-}
+  theBox: boolean;
+};
 
 const buttons = {
   yay: {
     default: true,
-    label: 'The default button',
+    label: "The default button",
   },
   echo: {
     default: true,
-    icon: 'play',
-    label: 'Echo!',
+    icon: "play",
+    label: "Echo!",
     callback: (params: Model) => {
-      console.log(`TheBox: ${params.theBox ? 'yes' : 'no'}`)
-    }
-  }
-}
-
+      console.log(`TheBox: ${params.theBox ? "yes" : "no"}`);
+    },
+  },
+};
 
 const elements = {
-  theBox: new Nova.Elements.Checkbox('theBox', {
-    label: 'This is a test checkbox',
-  })
-}
+  theBox: new Elements.Checkbox("theBox", {
+    label: "This is a test checkbox",
+  }),
+};
 
-const Test = new Nova.Dialog({
+export const Test = new NovaDialog({
   title: "A test",
   elements,
   buttons,
-  template
-})
-
-export { Test };
+  template,
+});

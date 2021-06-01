@@ -1,23 +1,24 @@
-import { Nova } from "../../..";
-import template from "./CastBloodmagic.html";
+import template from './CastBloodmagic.html'
+import { Elements } from "../../Elements";
+import { NovaDialog } from "..";
 
 const cost = [4, 8, 12, 16, 20, 25, 30, 35, 40];
 const context = {
-  costs: new Nova.Elements.Constant(cost),
-  level: new Nova.Elements.Dropdown("level", {
+  costs: new Elements.Constant(cost),
+  level: new Elements.Dropdown("level", {
     label: "Spell Level:",
     options: cost.map((_, i) => {
       return { label: `${i + 1}`, value: i + 1 };
     }),
   }),
-  bp: new Nova.Elements.Checkbox("BloodPoints", {
+  bp: new Elements.Checkbox("BloodPoints", {
     label: "Spend blood point to reduce cost?",
   }),
-  chat: new Nova.Elements.Checkbox("SendToChat", {
+  chat: new Elements.Checkbox("SendToChat", {
     label: "Send to chat?",
     default: true,
   }),
-  update: new Nova.Elements.Checkbox("Update", {
+  update: new Elements.Checkbox("Update", {
     label: "Send updates to character sheet?",
     default: true,
   }),
@@ -62,7 +63,7 @@ const buttons = {
   },
 };
 
-export const CastBloodMagic = new Nova.Dialog({
+export const CastBloodMagic = new NovaDialog({
   title: "Blood Magic Cost",
   elements: context,
   buttons,

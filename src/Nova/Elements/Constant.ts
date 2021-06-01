@@ -1,6 +1,5 @@
-import { Element } from "./Element";
-
-export class Constant<T> extends Element<T> {
+import { Base } from "./Base";
+export class Constant<T> extends Base<T> {
   private value;
   constructor(value: T) {
     super();

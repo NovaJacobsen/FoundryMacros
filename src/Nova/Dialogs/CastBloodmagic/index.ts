@@ -1,1 +1,1 @@
-export * from './CastBloodmagic'
+export { CastBloodMagic } from "./CastBloodmagic"

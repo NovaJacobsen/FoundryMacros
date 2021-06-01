@@ -1,25 +1,26 @@
 <h1>Select spell level</h1>
 <div>
-    <label for="level">Spell level: </label>
-    <select id="level" name="level" required>${options}</select>
+  <label for="level">Spell level: </label>
+  <select id="level" name="level" required>
+    ${options}
+  </select>
 </div>
 
 #{BloodPoints}
 
 <h2>costs:</h2>
 <div>
-    <label for="bloodCost">Blood Points: </label>
-    <output id="bloodCost"></output>
+  <label for="bloodCost">Blood Points: </label>
+  <output id="bloodCost"></output>
 </div>
 <div>
-    <label for="healthCost">HP: </label>
-    <output id="healthCost"></output>
+  <label for="healthCost">HP: </label>
+  <output id="healthCost"></output>
 </div>
 <div>
-    <label for="corruptionCost">Corruption: </label>
-    <output id="corruptionCost"></output>
+  <label for="corruptionCost">Corruption: </label>
+  <output id="corruptionCost"></output>
 </div>
 
 <h2>options:</h2>
-#{SendToChat}
-#{Update}
+#{SendToChat} #{Update}

@@ -1,6 +1,6 @@
-import { Element } from "./Element";
+import { Base } from "./Base";
 
-export class Checkbox extends Element<boolean> {
+export class Checkbox extends Base<boolean> {
   private label;
   private checked;
   constructor(key: string, parms: { label?: string; default?: boolean }) {

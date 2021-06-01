@@ -1,4 +1,4 @@
-import { Nova } from "../..";
+import { Element, ElementCollection } from "../Elements";
 
 export class NovaDialog<T> {
   dialog: Dialog;
@@ -15,7 +15,7 @@ export class NovaDialog<T> {
     template,
   }: {
     title: string;
-    elements: Nova.Elements.ElementCollection<T>;
+    elements: ElementCollection<T>;
     buttons: { [_: string]: Button<T> };
     template: string;
   }) {
@@ -58,13 +58,13 @@ export class NovaDialog<T> {
     Object.entries(this.elements)
       .map(([key, val]) => ({
         key,
-        val: val as Nova.Elements.Element,
+        val: val as Element,
       }))
       .forEach(({ key, val }) => (out[key] = val.extract(html)));
     return out as T;
   }
 
-  private parseElements(e: Nova.Elements.ElementCollection<T>): Nova.Elements.Element[] {
+  private parseElements(e: ElementCollection<T>): Element[] {
     return Object.values(e);
   }
 }
