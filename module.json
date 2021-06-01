@@ -7,6 +7,6 @@
   "minimumCoreVersion": "0.7.0",
   "esmodules": ["index.js"],
   "url": "https://github.com/NovaJacobsen/FoundryMacros",
-  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/main/foundry-nova/module.json",
+  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/foundry-nova/main/static/module.json",
   "download": "https://codeload.github.com/NovaJacobsen/FoundryMacros/zip/refs/heads/build"
 }
