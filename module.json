@@ -1,0 +1,12 @@
+{
+  "name": "foundry-nova",
+  "title": "Nova's Foundry module",
+  "description": "A better API for foundry",
+  "author": "Nova",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.7.0",
+  "esmodules": ["index.js"],
+  "url": "https://github.com/NovaJacobsen/FoundryMacros",
+  "manifest": "https://raw.githubusercontent.com/NovaJacobsen/FoundryMacros/main/foundry-nova/module.json",
+  "download": "https://codeload.github.com/NovaJacobsen/FoundryMacros/zip/refs/heads/build"
+}
