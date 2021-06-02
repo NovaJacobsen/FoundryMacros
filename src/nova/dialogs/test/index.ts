@@ -1,4 +1,4 @@
-import { Checkbox } from "../../_elements";
+import { Checkbox } from "../../elements";
 import { NovaDialog } from "..";
 import template from "./Test.html";
 
