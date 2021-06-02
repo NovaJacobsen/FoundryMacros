@@ -1,24 +1,24 @@
-import template from './CastBloodmagic.html'
-import { Elements } from "../../Elements";
+import template from './cast-blood-magic.html'
+import { Checkbox, Constant, Dropdown } from "../../elements";
 import { NovaDialog } from "..";
 
 const cost = [4, 8, 12, 16, 20, 25, 30, 35, 40];
 const context = {
-  costs: new Elements.Constant(cost),
-  level: new Elements.Dropdown("level", {
+  costs: new Constant(cost),
+  level: new Dropdown("level", {
     label: "Spell Level:",
     options: cost.map((_, i) => {
       return { label: `${i + 1}`, value: i + 1 };
     }),
   }),
-  bp: new Elements.Checkbox("BloodPoints", {
+  bp: new Checkbox("BloodPoints", {
     label: "Spend blood point to reduce cost?",
   }),
-  chat: new Elements.Checkbox("SendToChat", {
+  chat: new Checkbox("SendToChat", {
     label: "Send to chat?",
     default: true,
   }),
-  update: new Elements.Checkbox("Update", {
+  update: new Checkbox("Update", {
     label: "Send updates to character sheet?",
     default: true,
   }),

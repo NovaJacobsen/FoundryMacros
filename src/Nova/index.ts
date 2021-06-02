@@ -1,10 +1,5 @@
-import { Dialogs } from "./Dialogs";
-import { Elements } from "./Elements";
-import { registerHooks } from "./hooks";
-
-export const Nova = {
-  Dialogs,
-  Elements,
-};
+export { dialogs } from "./dialogs/index";
+export * as elements from "./elements/index";
+import { registerHooks } from "./hooks/index";
 
 registerHooks();

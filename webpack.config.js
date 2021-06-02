@@ -14,6 +14,7 @@ if (mode === "development") console.log(`creating development build in ${out}`);
 module.exports = {
   entry: "./src/index.ts",
   mode,
+  mode,
   module: {
     rules: [
       {
@@ -28,10 +29,6 @@ module.exports = {
     ],
   },
 
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
-
   plugins: [
     new CopyPlugin({
       patterns: [
@@ -42,6 +39,10 @@ module.exports = {
       ],
     }),
   ],
+
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
 
   output: {
     publicPath: "",

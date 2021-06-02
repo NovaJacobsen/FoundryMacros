@@ -1,7 +1,7 @@
-import { Nova } from "..";
+import * as nova from "..";
 
 export const registerHooks = () => {
   Hooks.once("ready", () => {
-    game.Nova = Nova;
+    game.nova = nova
   });
 };

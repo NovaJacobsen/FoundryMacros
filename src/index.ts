@@ -1,1 +1,1 @@
-import './Nova'
+import "./nova/index"
