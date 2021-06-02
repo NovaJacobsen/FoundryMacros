@@ -1,6 +1,6 @@
 import { Checkbox } from "../../elements";
 import { NovaDialog } from "..";
-import template from "./Test.html";
+import template from "./test.html";
 
 type Model = {
   theBox: boolean;
