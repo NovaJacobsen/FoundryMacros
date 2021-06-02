@@ -9,7 +9,7 @@ jobs:
     name: Deploy to Build Branch
     runs-on: ubuntu-latest    
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
