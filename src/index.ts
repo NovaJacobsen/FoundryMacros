@@ -1,1 +1,1 @@
-import "./nova/index"
+import "./_nova/index"

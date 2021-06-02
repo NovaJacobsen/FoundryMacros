@@ -1,2 +1,2 @@
 export { CastBloodMagic } from "./cast-blood-magic/index";
-export { Test } from "./test/index";
+export { Test } from "./Test/index";

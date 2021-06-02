@@ -1,5 +1,5 @@
 import template from './cast-blood-magic.html'
-import { Checkbox, Constant, Dropdown } from "../../elements";
+import { Checkbox, Constant, Dropdown } from "../../_elements";
 import { NovaDialog } from "..";
 
 const cost = [4, 8, 12, 16, 20, 25, 30, 35, 40];

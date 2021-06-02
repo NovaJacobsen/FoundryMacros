@@ -1,4 +1,4 @@
-import { Element, ElementCollection } from "../elements";
+import { Element, ElementCollection } from "../_elements";
 
 export class NovaDialog<T> {
   dialog: Dialog;
