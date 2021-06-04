@@ -3,7 +3,8 @@ import { Element, ElementCollection } from "../elements";
 export class NovaDialog<T> {
   dialog: Dialog;
   title;
-  elements;
+  elements: Element[];
+  elementKeys;
   html: string;
   buttons: Record<string, Dialog.Button> = {};
   d: string = "";
@@ -20,11 +21,12 @@ export class NovaDialog<T> {
     template: string;
   }) {
     this.title = title;
-    this.elements = elements;
-    this.html = this.parseElements(elements).reduce(
+    this.elements = Object.values(elements);
+    this.elementKeys = Object.keys(elements);
+    this.html = `<form id="ndia">${this.elements.reduce(
       (t, e) => e.apply(t),
       template
-    );
+    )}</form>`;
 
     Object.entries(buttons).forEach(([name, button]) => {
       if (button.default) {
@@ -36,16 +38,33 @@ export class NovaDialog<T> {
         : undefined;
       this.buttons[name] = {
         icon: `<i class="fas fa-${button.icon}"></i>`,
-        label: button.label,
-        callback,
+        label: button.label!,
+        callback: callback!,
       };
     });
+
+    const onChange = (html: JQuery) => {
+      return () =>
+        this.elements.forEach((e) => {
+          const model = this.extract(html);
+          try {
+            e.update(html, model);
+          } catch (e) {
+            console.log(`Failed to update: ${e.key} with:`, model);
+          }
+        });
+    };
 
     this.dialog = new Dialog({
       title: this.title,
       content: this.html,
       buttons: this.buttons,
       default: this.d,
+      render: (html: JQuery) => {
+        let form = html.find("#ndia")[0] as HTMLFormElement;
+        form.addEventListener("change", onChange(html), true);
+        onChange(html)();
+      },
     });
   }
 
@@ -54,18 +73,12 @@ export class NovaDialog<T> {
   }
 
   public extract(html: JQuery<HTMLElement>): T {
-    let out = {} as any;
-    Object.entries(this.elements)
-      .map(([key, val]) => ({
-        key,
-        val: val as Element,
-      }))
-      .forEach(({ key, val }) => (out[key] = val.extract(html)));
+    let out = Object.fromEntries(
+      this.elements.map((element, index) => {
+        return [this.elementKeys[index], element.extract(html)];
+      })
+    );
     return out as T;
-  }
-
-  private parseElements(e: ElementCollection<T>): Element[] {
-    return Object.values(e);
   }
 }
 

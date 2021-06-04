@@ -3,6 +3,7 @@ export { Base } from "./Base";
 export { Checkbox } from "./Checkbox";
 export { Constant } from "./Constant";
 export { Dropdown } from "./Dropdown";
+export { Output } from "./Output";
 
 export type ElementCollection<T> = { [P in keyof T]: Base<T[P]> };
-export type Element = Base;
+export type Element<T = any> = Base<T>;

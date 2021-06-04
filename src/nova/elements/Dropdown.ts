@@ -10,10 +10,7 @@ export class Dropdown<T> extends Base<T> {
   constructor(key: string, parms: Parms<T>) {
     super(key);
     this.parms = parms;
-  }
-
-  injectHtml(): string {
-    return `
+    this.injectHtml = `
     ${
       this.parms.label
         ? `<label for="${this.key}">${this.parms.label}</label>`

@@ -1,12 +1,12 @@
 import { Base } from "./Base";
 export class Constant<T> extends Base<T> {
   private value;
-  constructor(value: T) {
-    super();
+  constructor(key: string, value: T) {
+    super(key);
     this.value = value;
   }
-  injectHtml(): string {
-    return "";
+  apply(a: string) {
+    return a;
   }
   extract(_: any): T {
     return this.value;
