@@ -27,9 +27,7 @@ export class CustomResources {
         getKey: () => data[key].current,
         select: (k: keyof Resources) => {
           data[key].current = k;
-          updateIndex = {};
           updateIndex[key] = { current: k };
-          updateRes = {};
         },
         set: (n: number) => {
           resources[data[key].current].value = n;

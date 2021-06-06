@@ -72,12 +72,13 @@ export const castBloodMagic = (char?: Actor): NovaDialog<Model> => {
   const callback = (params: Model) => {
     if (params.update && me) {
       let bp = me.customResources.bloodPoints;
-      bp.select(params.bpAttr);
       bp.set(bp.get() - params.bpCost);
-      let c = me.customResources.bloodPoints;
-      c.set(c.get() - params.bpCost);
+
+      let c = me.customResources.corruption;
+      c.set(c.get() + params.cCost);
 
       me.save(true);
+      me.save();
     }
 
     if (params.chat) {
