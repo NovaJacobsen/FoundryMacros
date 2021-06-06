@@ -1,5 +1,6 @@
 import { Base } from "./Base";
 export { Base } from "./Base";
+export { Blank } from "./Blank";
 export { Checkbox } from "./Checkbox";
 export { Constant } from "./Constant";
 export { Dropdown } from "./Dropdown";

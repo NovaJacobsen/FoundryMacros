@@ -16,7 +16,7 @@ const buttons = {
     icon: "play",
     label: "Echo!",
     callback: (params: Model) => {
-      console.log(`TheBox: ${params.theBox ? "yes" : "no"}`);
+      console.info(`TheBox: ${params.theBox ? "yes" : "no"}`);
     },
   },
 };

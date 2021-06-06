@@ -19,10 +19,9 @@ export class Output<T, M> extends Base<T> {
     this.render = parms.render || this.interpolate;
     this.label = parms.label;
     this.value = parms.default;
-    this.injectHtml = `<div>
+    this.injectHtml = `
     ${this.label ? `<label for="${this.key}">${this.label}</label>` : ""}
-    <output id="${this.key}"></output>
-    </div>`;
+    <output id="${this.key}"></output>`;
   }
 
   private interpolate(value: T): string {
@@ -37,7 +36,9 @@ export class Output<T, M> extends Base<T> {
     if (this.updateData) {
       this.value = this.updateData(model);
 
-      this.getElement<HTMLOutputElement>(html).value = this.render(this.value);
+      this.getElement<HTMLOutputElement>(html)[0].value = this.render(
+        this.value
+      );
     }
   };
 }

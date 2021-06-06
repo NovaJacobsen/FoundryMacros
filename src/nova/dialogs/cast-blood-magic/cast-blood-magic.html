@@ -1,12 +1,12 @@
 <h1>Select spell level</h1>
-#{Level}
-
-#{BloodPoints}
+#{Level} #{BloodPoints}
 
 <h2>Costs:</h2>
-#{BloodCost}
-#{HealthCost}
-#{CorruptionCost}
+<ul>
+  <li>#{BloodCost} #{BloodCurrent} #{BloodAttr}</li>
+  <li>#{HealthCost} #{HealthCurrent}</li>
+  <li>#{CorruptionCost} #{CorruptionCurrent} #{CorruptionAttr}</li>
+</ul>
 
 <h2>Options:</h2>
 #{SendToChat} #{Update}

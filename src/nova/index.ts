@@ -1,5 +1,6 @@
-export { dialogs } from "./dialogs/index";
-export * as elements from "./elements/index";
-import { registerHooks } from "./hooks/index";
+export { dialogs } from "./dialogs";
+export * as models from "./models"
+export * as elements from "./elements";
+import { registerHooks } from "./hooks";
 
 registerHooks();

@@ -26,7 +26,7 @@ export class NovaDialog<T> {
     this.html = `<form id="ndia">${this.elements.reduce(
       (t, e) => e.apply(t),
       template
-    )}</form>`;
+    )}</form>`.replaceAll(/\#\{[^{]*\}/g, "");
 
     Object.entries(buttons).forEach(([name, button]) => {
       if (button.default) {
@@ -39,20 +39,30 @@ export class NovaDialog<T> {
       this.buttons[name] = {
         icon: `<i class="fas fa-${button.icon}"></i>`,
         label: button.label!,
+        //@ts-ignore
+        jQuery: true,
         callback: callback!,
       };
     });
 
     const onChange = (html: JQuery) => {
-      return () =>
-        this.elements.forEach((e) => {
-          const model = this.extract(html);
-          try {
-            e.update(html, model);
-          } catch (e) {
-            console.log(`Failed to update: ${e.key} with:`, model);
-          }
-        });
+      return () => {
+        let model: T = {} as T;
+        let oldModel: T;
+        let circuit = 10;
+        do {
+          oldModel = model;
+          this.elements.forEach((e) => {
+            model = this.extract(html);
+            try {
+              e.update(html, model);
+            } catch (e) {
+              console.error(`Failed to update: ${e.key} with:`, model);
+            }
+          });
+          if (circuit-- < 0) break;
+        } while (JSON.stringify(model) !== JSON.stringify(oldModel));
+      };
     };
 
     this.dialog = new Dialog({
@@ -62,8 +72,15 @@ export class NovaDialog<T> {
       default: this.d,
       render: (html: JQuery) => {
         let form = html.find("#ndia")[0] as HTMLFormElement;
-        form.addEventListener("change", onChange(html), true);
+        form.addEventListener(
+          "change",
+          () => {
+            queueMicrotask(onChange(html));
+          },
+          true
+        );
         onChange(html)();
+        this.elements.forEach((x) => x.onRender(html));
       },
     });
   }

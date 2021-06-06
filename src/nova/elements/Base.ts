@@ -5,15 +5,18 @@ export abstract class Base<T, M= unknown> {
   }
 
   update(_html: JQuery, _model: M): void { }
+  onRender(_html: JQuery): void { }
+
+  abstract extract(html: JQuery): T;
+  protected injectHtml: string = "";
+
+  protected getElement<K extends HTMLElement>(html: JQuery): JQuery<K> {
+    const findings = html.find(`#${this.key}`)
+    if(findings.length === 0) { console.error(`could not find element ${this.key}`)}
+    return findings as JQuery<K>
+  }
 
   apply(template: string): string {
     return template.replaceAll(`#{${this.key}}`, this.injectHtml);
-  }
-
-  abstract extract(html: JQuery<HTMLElement>): T;
-  protected injectHtml: string = "";
-
-  protected getElement<K extends HTMLElement>(html: JQuery): K {
-    return (html as JQuery<HTMLElement>).find(`#${this.key}`)[0] as K;
   }
 }
