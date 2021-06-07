@@ -17,6 +17,7 @@ export type CharacterActor = {
 export type CharacterData = {
   nova?: CustomParams;
   resources: Resources;
+  attributes: Attributes;
 };
 
 export type Resources = {

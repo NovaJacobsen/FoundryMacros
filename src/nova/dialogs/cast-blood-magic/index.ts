@@ -43,29 +43,36 @@ export const castBloodMagic = (char?: Actor): NovaDialog<Model> => {
     }),
     update: new Checkbox("Update", {
       label: "Send updates to character sheet?",
-      default: true,
+      default: !!me,
       disabled: !me,
     }),
   };
 
   if (me) {
     elements.bpCurr = new Output("BloodCurrent", {
-      label: "Current:",
+      label: "/",
       update: me.customResources.bloodPoints.get,
       default: 0,
     });
+    elements.cCurr = new Output("CorruptionCurrent", {
+      label: "/",
+      update: me.customResources.corruption.get,
+      default: 0,
+    });
+    elements.hpCurr = new Output("HealthCurrent", {
+      label: "/",
+      update: me.attributes.hp.get,
+      default: 0,
+    });
     elements.bpAttr = new AttrDropdown("BloodAttr", {
+      label: "Resource for Bloodpoints:",
       char: me,
       r: me.customResources.bloodPoints,
     });
     elements.cAttr = new AttrDropdown("CorruptionAttr", {
+      label: "Resource for Corruption:",
       char: me,
       r: me.customResources.corruption,
-    });
-    elements.cCurr = new Output("CorruptionCurrent", {
-      label: "Current:",
-      update: me.customResources.corruption.get,
-      default: 0,
     });
   }
 
@@ -76,6 +83,9 @@ export const castBloodMagic = (char?: Actor): NovaDialog<Model> => {
 
       let c = me.customResources.corruption;
       c.set(c.get() + params.cCost);
+
+      let hp = me.attributes.hp;
+      hp.set(hp.get() - params.hpCost);
 
       me.save(true);
       me.save();

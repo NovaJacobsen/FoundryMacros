@@ -1,3 +1,5 @@
+import { CharacterAttributes } from "./customParams/attributes";
+import { Attributes } from "./customParams/attributes/Attributes";
 import { CharacterResources } from "./customParams/customResources";
 import { CustomResources } from "./customParams/customResources/CustomResources";
 import { CharacterActor, Update } from "./types";
@@ -6,12 +8,16 @@ export class Character {
   private actor: CharacterActor;
   private updates: Update;
   public customResources: CharacterResources;
+  public attributes: CharacterAttributes;
 
   constructor(actor: Actor) {
     this.actor = actor;
-    [this.customResources, this.updates] = CustomResources.init(
-      this.actor.data.data
+    this.updates = {} as Update;
+    this.customResources = CustomResources.init(
+      this.actor.data.data,
+      this.updates
     );
+    this.attributes = Attributes.init(this.actor.data.data, this.updates);
   }
 
   get resorces() {

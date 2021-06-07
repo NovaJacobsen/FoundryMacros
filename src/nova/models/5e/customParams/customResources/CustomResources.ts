@@ -9,9 +9,7 @@ export class CustomResources {
     this.corruption = data?.corruption || new Corruption(res);
   }
 
-  static init(
-    actorData: CharacterData
-  ): [res: CharacterResources, updates: Update] {
+  static init(actorData: CharacterData, update: Update): CharacterResources {
     const resources: Resources = actorData.resources;
     let updateIndex: Optional<CustomResources> = {};
     let updateRes: Optional<Resources> = {};
@@ -36,6 +34,9 @@ export class CustomResources {
         },
       };
     }
-    return [out, { nova: { resources: updateIndex }, resources: updateRes }];
+    update.nova ||= {};
+    update.nova.resources = updateIndex;
+    update.resources = updateRes;
+    return out;
   }
 }
