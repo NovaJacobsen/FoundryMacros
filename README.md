@@ -6,6 +6,7 @@ This module is mostly a "library" module that defines functions to build uppon.
 However, some certain features are usable "out of the box" by defining some simple macros:
 
  - `novaAPI.dialogs.castBloodMagic().render()` - Will open a dialog for casting blood magic spells. This is meant for DnD 5e, when playing the [blood mage](http://dndncc.wikidot.com/blood-mage) homebrew class
+ - `novaAPI.dialogs.spellResearch().render()` - Will open a dialog for studying or creating spells for your spellbook.
 
 ## API
 The API is exposed on the top level window through the `novaAPI` variable, just like how most of foudry's own API is available through the `game` variable.
