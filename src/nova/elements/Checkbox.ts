@@ -1,21 +1,21 @@
 import { Base } from "./Base";
 
 export class Checkbox extends Base<boolean> {
-  constructor(key: string, parms: { label?: string; default?: boolean , disabled?: boolean}) {
+  constructor(
+    key: string,
+    params: { label?: string; default?: boolean; disabled?: boolean }
+  ) {
     super(key);
-    this.injectHtml = `<div> ${
-      parms.label ? `<label for="${this.key}">${parms.label}</label>` : ""
-    } <input
+    this.injectHtml = `${this.labelHtml(params.label)} <input
         type=checkbox
         id="${this.key}"
         name="${this.key}"
-        ${parms.default ? "checked" : ""}
-        ${parms.disabled ? "disabled" : ""}
-      ></input>
-    </div>`;
+        ${params.default ? "checked" : ""}
+        ${params.disabled ? "disabled" : ""}
+      ></input>`;
   }
 
   extract(html: JQuery<HTMLElement>) {
-    return this.getElement<HTMLInputElement>(html)[0].checked
+    return this.getElement<HTMLInputElement>(html).checked;
   }
 }

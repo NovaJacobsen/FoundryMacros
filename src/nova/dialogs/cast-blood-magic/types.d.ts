@@ -1,6 +1,3 @@
-import { Base, Blank, ElementCollection } from "../../elements";
-import { Resources } from "../../models/5e/types";
-
 export type Elements = {
   [P in keyof Model]: Base<Model[P]>;
 };

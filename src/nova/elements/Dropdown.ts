@@ -1,11 +1,8 @@
 import { Character } from "../models/5e";
-import {
-  CharacterResource,
-  CharacterResources,
-} from "../models/5e/customParams/customResources";
+import { CharacterResource } from "../models/5e/customParams/customResources";
 import { Resource, Resources } from "../models/5e/types";
 import { Base } from "./Base";
-interface Parms<T> {
+interface params<T> {
   label?: string | undefined;
   required?: boolean | undefined;
   disabled?: boolean | undefined;
@@ -15,15 +12,10 @@ interface Parms<T> {
 export class Dropdown<T> extends Base<T> {
   protected params;
 
-  constructor(key: string, params: Parms<T>) {
+  constructor(key: string, params: params<T>) {
     super(key);
     this.params = params;
-    this.injectHtml = `
-    ${
-      this.params.label
-        ? `<label for="${this.key}">${this.params.label}</label>`
-        : ""
-    }
+    this.injectHtml = `${this.labelHtml(params.label)}
     <select id="${this.key}" name="${this.key}">${this.params.options.map(
       (option) => {
         return `<option ${option.value === params.selected ? "selected" : ""}>${
@@ -36,7 +28,7 @@ export class Dropdown<T> extends Base<T> {
 
   extract(html: JQuery<HTMLElement>) {
     return this.params.options[
-      this.getElement<HTMLSelectElement>(html)[0].selectedIndex
+      this.getElement<HTMLSelectElement>(html).selectedIndex
     ].value;
   }
 }
@@ -45,7 +37,7 @@ export class AttrDropdown extends Dropdown<keyof Resources> {
   r;
   constructor(
     key: string,
-    p: Partial<Parms<Resource> & { char: Character; r: CharacterResource }>
+    p: Partial<params<Resource> & { char: Character; r: CharacterResource }>
   ) {
     super(key, {
       ...p,
@@ -63,13 +55,8 @@ export class AttrDropdown extends Dropdown<keyof Resources> {
   }
   onRender(html: JQuery) {
     super.onRender(html);
-    this.getElement<HTMLSelectElement>(html)[0].addEventListener(
-      "change",
-      () => {
-        this.r?.select(
-          this.extract(html)
-        );
-      }
-    );
+    this.getElement<HTMLSelectElement>(html).addEventListener("change", () => {
+      this.r?.select(this.extract(html));
+    });
   }
 }

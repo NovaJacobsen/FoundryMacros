@@ -1,5 +1,7 @@
 import { Element, ElementCollection } from "../elements";
 
+const tags = /\#\{[^{]*\}/g;
+
 export class NovaDialog<T> {
   dialog: Dialog;
   title;
@@ -8,25 +10,30 @@ export class NovaDialog<T> {
   html: string;
   buttons: Record<string, Dialog.Button> = {};
   d: string = "";
+  options = Dialog.defaultOptions;
 
   constructor({
     title,
     elements,
     buttons,
     template,
+    options,
   }: {
     title: string;
     elements: ElementCollection<T>;
     buttons: { [_: string]: Button<T> };
     template: string;
+    options?: { height?: number; width?: number };
   }) {
+    if(options?.height) this.options.height = options.height
+    if(options?.width) this.options.width = options.width
     this.title = title;
     this.elements = Object.values(elements);
     this.elementKeys = Object.keys(elements);
     this.html = `<form id="ndia">${this.elements.reduce(
       (t, e) => e.apply(t),
       template
-    )}</form>`.replaceAll(/\#\{[^{]*\}/g, "");
+    )}</form>`.replaceAll(tags, "");
 
     Object.entries(buttons).forEach(([name, button]) => {
       if (button.default) {
@@ -37,7 +44,7 @@ export class NovaDialog<T> {
             button.callback!(this.extract(html as JQuery))
         : undefined;
       this.buttons[name] = {
-        icon: `<i class="fas fa-${button.icon}"></i>`,
+        icon: `<i class="fas fa-${button.icon?.toLocaleLowerCase()}"></i>`,
         label: button.label!,
         //@ts-ignore
         jQuery: true,
@@ -52,12 +59,16 @@ export class NovaDialog<T> {
         let circuit = 10;
         do {
           oldModel = model;
-          this.elements.forEach((e) => {
+          this.elements.forEach((elem) => {
             model = this.extract(html);
             try {
-              e.update(html, model);
-            } catch (e) {
-              console.error(`Failed to update: ${e.key} with:`, model);
+              elem.update(html, model);
+            } catch (error: any) {
+              console.error(
+                `Failed to update: ${elem.key} with:`,
+                model,
+                error
+              );
             }
           });
           if (circuit-- < 0) break;
@@ -65,24 +76,27 @@ export class NovaDialog<T> {
       };
     };
 
-    this.dialog = new Dialog({
-      title: this.title,
-      content: this.html,
-      buttons: this.buttons,
-      default: this.d,
-      render: (html: JQuery) => {
-        let form = html.find("#ndia")[0] as HTMLFormElement;
-        form.addEventListener(
-          "change",
-          () => {
-            queueMicrotask(onChange(html));
-          },
-          true
-        );
-        onChange(html)();
-        this.elements.forEach((x) => x.onRender(html));
+    this.dialog = new Dialog(
+      {
+        title: this.title,
+        content: this.html,
+        buttons: this.buttons,
+        default: this.d,
+        render: (html: JQuery) => {
+          let form = html.find("#ndia")[0] as HTMLFormElement;
+          form.addEventListener(
+            "change",
+            () => {
+              queueMicrotask(onChange(html));
+            },
+            true
+          );
+          onChange(html)();
+          this.elements.forEach((x) => x.onRender(html));
+        },
       },
-    });
+      this.options
+    );
   }
 
   public render(): void {

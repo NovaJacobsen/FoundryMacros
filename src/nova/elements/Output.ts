@@ -7,7 +7,7 @@ export class Output<T, M> extends Base<T> {
   updateData;
   constructor(
     key: string,
-    parms: {
+    params: {
       label?: string;
       update?: (model: M) => T;
       render?: (value: T) => string;
@@ -15,10 +15,10 @@ export class Output<T, M> extends Base<T> {
     }
   ) {
     super(key);
-    this.updateData = parms.update;
-    this.render = parms.render || this.interpolate;
-    this.label = parms.label;
-    this.value = parms.default;
+    this.updateData = params.update;
+    this.render = params.render || this.interpolate;
+    this.label = params.label;
+    this.value = params.default;
     this.injectHtml = `
     ${this.label ? `<label for="${this.key}">${this.label}</label>` : ""}
     <output id="${this.key}"></output>`;
@@ -36,9 +36,7 @@ export class Output<T, M> extends Base<T> {
     if (this.updateData) {
       this.value = this.updateData(model);
 
-      this.getElement<HTMLOutputElement>(html)[0].value = this.render(
-        this.value
-      );
+      this.getElement<HTMLOutputElement>(html).value = this.render(this.value);
     }
   };
 }
