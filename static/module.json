@@ -3,7 +3,7 @@
   "title": "Nova's Foundry module",
   "description": "A better API for foundry",
   "author": "Nova",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "minimumCoreVersion": "0.7.0",
   "esmodules": ["index.js"],
   "url": "https://github.com/NovaJacobsen/foundry-nova",
